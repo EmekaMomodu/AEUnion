@@ -28,7 +28,7 @@
 
 
 <!-- Body -->
-<body class="gla_middle_titles">
+<body class="gla_middle_titles" data-offset="50" data-spy="scroll" data-target=".navbar">
 
 
 <!-- Page -->
@@ -55,13 +55,13 @@
         <nav class="gla_light_nav gla_transp_nav">
 
             <div class="container">
-                
+
                 <div class="gla_logo_container clearfix">
-                    <img th:src="@{/img/glanz_logo.png}" alt="" class="gla_logo_rev">
+                    <img th:src="@{/img/AE-test-3.png}" alt="" class="gla_logo_rev">
                     <div class="gla_logo_txt">
                         <!-- Logo -->
                         <a href="/" class="gla_logo">Adaorah & Emeodi</a>
-                        
+
                         <!-- Text Logo -->
                         <div class="gla_logo_und">October 23, 2021</div>
                     </div>
@@ -128,7 +128,7 @@
                 <!-- Top Menu End -->
 
 
-               
+
             </div>
             <!-- container end -->
         </nav>
@@ -320,7 +320,7 @@
                 <h2>Registry</h2>
                 <p>We’re lucky enough to have YOU as a friend and well-wisher, show us some more love by gifting us something to update our home, we’ve compiled a short registry as well.</p>
 
-                <a href="#" class="btn">View Registry</a>
+                <a th:href="@{/registry}" class="btn" target="_blank" rel="noopener noreferrer">View Registry</a>
 
             </div>
             <!-- container end -->
@@ -411,7 +411,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-sm-4">
-                        <p>© Emeka Momodu. 2021</p>
+                        <p>© 2021 Emeka Momodu - All Rights Reserved.</p>
                     </div>
                     <div class="col-md-4 col-sm-4 text-center">
                         <div class="gla_social_btns">
