@@ -2,7 +2,7 @@
 function payWithPaystack(email, amount) {
 
     var handler = PaystackPop.setup({ 
-        key: 'pk_test_9bad28ceec9ca4527eaeeec10488f7094b9e45dc', //put your public key here
+        key: 'pk_test_76bcdf37698fdf3e932081c736ca471264722762', //put your public key here
         email: email, //put your customer's email here
         amount: amount.replace(".", ""), //amount the customer is supposed to pay
         metadata: {
