@@ -19,7 +19,7 @@ function payWithPaystack(email, amount) {
             //make post call  to the server with to verify payment 
             //using transaction reference as post data
             $.post("verify.php", {reference:response.reference}, function(status){
-                if(status == "success")
+                if(status === "success")
                     //successful transaction
                     alert('Transaction was successful');
                 else
