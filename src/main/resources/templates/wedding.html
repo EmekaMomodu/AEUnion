@@ -98,7 +98,7 @@
 
                             <li class=""><a href="#registry">Registry</a> </li>
 
-                            <li class=""><a href="#rsvp">RSVP</a> </li>
+                            <li class=""><a href="#wedding_party">The Wedding Party</a> </li>
 
                         </ul>
                     </div>
@@ -121,7 +121,7 @@
 
                         <li class=""><a href="#registry">Registry</a> </li>
 
-                        <li class=""><a href="#rsvp">RSVP</a> </li>
+                        <li class=""><a href="#wedding_party">The Wedding Party</a> </li>
 
                     </ul>
                 </div>
@@ -329,66 +329,118 @@
         <!-- section end -->
 
 
-        <!-- section -->
-        <section class="gla_section" id="rsvp" >
-            
-            <!-- Over -->
-<!--            <div class="gla_over" data-color="#000" data-opacity="0.7"></div>-->
-            
-            <div class="container text-center">
-                <p><img th:src="@{/img/animations/rsvp_gold.gif}" height="200" alt=""></p>
-                
-                <div class="row">
-                    <div class="col-md-8 col-md-push-2">
-                        <form action="https://formspree.io/f/xjvjdkgr" method="POST" onsubmit="this.submit(); this.reset(); return false;">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Your name*</label>
-                                    <input type="text" name="name" class="form-control form-opacity">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Your e-mail*</label>
-                                    <input type="text" name="email" class="form-control form-opacity">
-                                </div>
-                  
-                                <div class="col-md-6">
-                                    <label>Will you attend?</label>
+<!--        &lt;!&ndash; section &ndash;&gt;-->
+<!--        <section class="gla_section" id="rsvp" >-->
+<!--            -->
+<!--            &lt;!&ndash; Over &ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="gla_over" data-color="#000" data-opacity="0.7"></div>&ndash;&gt;-->
+<!--            -->
+<!--            <div class="container text-center">-->
+<!--                <p><img th:src="@{/img/animations/rsvp_gold.gif}" height="200" alt=""></p>-->
+<!--                -->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-8 col-md-push-2">-->
+<!--                        <form action="https://formspree.io/f/xjvjdkgr" method="POST" onsubmit="this.submit(); this.reset(); return false;">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-md-6">-->
+<!--                                    <label>Your name*</label>-->
+<!--                                    <input type="text" name="name" class="form-control form-opacity">-->
+<!--                                </div>-->
+<!--                                <div class="col-md-6">-->
+<!--                                    <label>Your e-mail*</label>-->
+<!--                                    <input type="text" name="email" class="form-control form-opacity">-->
+<!--                                </div>-->
+<!--                  -->
+<!--                                <div class="col-md-6">-->
+<!--                                    <label>Will you attend?</label>-->
 
-                                    <input type="radio" name="attend" value="Yes, I will be there">
-                                    <span>Yes, I will be there</span><br>
-                                    <input type="radio" name="attend" value="Sorry, I can't come">
-                                    <span>Sorry, I can't come</span>
-                                    
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Meal preference</label>
-                                    <select name="meal" class="form-control form-opacity">
-                                        <option value="" selected disabled>Choose an option</option>
-                                        <option value="I eat anything">I eat anything</option>
-                                        <option value="Beef">Beef</option>
-                                        <option value="Chicken">Chicken</option>
-                                        <option value="Vegetarian">Vegetarian</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-12">
-                                    <label>Notes</label>
-                                    <textarea name="message" class="form-control form-opacity"></textarea>
-                                </div>
-                                <div class="col-md-12">
-                                    <input type="submit" class="btn submit" value="Send">
-                                </div>
-                            </div>
-                        </form>
+<!--                                    <input type="radio" name="attend" value="Yes, I will be there">-->
+<!--                                    <span>Yes, I will be there</span><br>-->
+<!--                                    <input type="radio" name="attend" value="Sorry, I can't come">-->
+<!--                                    <span>Sorry, I can't come</span>-->
+<!--                                    -->
+<!--                                </div>-->
+<!--                                <div class="col-md-6">-->
+<!--                                    <label>Meal preference</label>-->
+<!--                                    <select name="meal" class="form-control form-opacity">-->
+<!--                                        <option value="" selected disabled>Choose an option</option>-->
+<!--                                        <option value="I eat anything">I eat anything</option>-->
+<!--                                        <option value="Beef">Beef</option>-->
+<!--                                        <option value="Chicken">Chicken</option>-->
+<!--                                        <option value="Vegetarian">Vegetarian</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-12">-->
+<!--                                    <label>Notes</label>-->
+<!--                                    <textarea name="message" class="form-control form-opacity"></textarea>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-12">-->
+<!--                                    <input type="submit" class="btn submit" value="Send">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                -->
+<!--                -->
+<!--            </div>-->
+<!--            &lt;!&ndash; container end &ndash;&gt;-->
+
+<!--        </section>-->
+<!--        &lt;!&ndash; section end &ndash;&gt;-->
+
+
+        <!-- section -->
+        <section class="gla_section gla_image_bck" data-color="#fff" id="wedding_party">
+
+
+            <div class="container text-center">
+
+                <h2>The Wedding Party</h2>
+
+                <div class="row text-center">
+                    <div class="col-md-3 gla_round_block">
+                        <div class="gla_round_im gla_image_bck" data-image="http://placehold.it/600x600"></div>
+                        <h4>Emeka Momodu</h4>
+                    </div>
+                    <div class="col-md-3 gla_round_block">
+                        <div class="gla_round_im gla_image_bck" data-image="http://placehold.it/600x600"></div>
+                        <h4>Omo Momodu</h4>
+                    </div>
+                    <div class="col-md-3 gla_round_block">
+                        <div class="gla_round_im gla_image_bck" data-image="http://placehold.it/600x600"></div>
+                        <h4>Michael Momodu</h4>
+                    </div>
+                    <div class="col-md-3 gla_round_block">
+                        <div class="gla_round_im gla_image_bck" data-image="http://placehold.it/600x600"></div>
+                        <h4>John Pitterson</h4>
+                    </div>
+
+                    <div class="col-md-3 gla_round_block">
+                        <div class="gla_round_im gla_image_bck" data-image="http://placehold.it/600x600"></div>
+                        <h4>Katy Auzmann</h4>
+                    </div>
+                    <div class="col-md-3 gla_round_block">
+                        <div class="gla_round_im gla_image_bck" data-image="http://placehold.it/600x600"></div>
+                        <h4>Mark Donald</h4>
+                    </div>
+                    <div class="col-md-3 gla_round_block">
+                        <div class="gla_round_im gla_image_bck" data-image="http://placehold.it/600x600"></div>
+                        <h4>Ann Willson</h4>
+                    </div>
+                    <div class="col-md-3 gla_round_block">
+                        <div class="gla_round_im gla_image_bck" data-image="http://placehold.it/600x600"></div>
+                        <h4>Dominic Shilz</h4>
                     </div>
                 </div>
-                
-                
+
+
+
             </div>
             <!-- container end -->
 
         </section>
         <!-- section end -->
-
 
 <!--        &lt;!&ndash; section &ndash;&gt;-->
 <!--        <section class="gla_section gla_image_bck gla_fixed gla_wht_txt" data-stellar-background-ratio="0.8" data-image="http://placehold.it/1400x800">-->
