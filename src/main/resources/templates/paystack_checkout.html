@@ -38,6 +38,34 @@
     <a class="gla_top ti ti-angle-up gla_go" href="#gla_page"></a>
 
 
+    <!-- Header -->
+    <header>
+
+
+
+        <nav class="gla_light_nav gla_transp_nav">
+
+            <div class="container">
+
+                <div class="gla_logo_container clearfix">
+                    <img th:src="@{/img/AE-test-3.png}" alt="" class="gla_logo_rev">
+<!--                    <div class="gla_logo_txt">-->
+<!--                        &lt;!&ndash; Logo &ndash;&gt;-->
+<!--                        <a href="/" class="gla_logo">Adaorah & Emeodi</a>-->
+
+<!--                        &lt;!&ndash; Text Logo &ndash;&gt;-->
+<!--                        <div class="gla_logo_und">October 23, 2021</div>-->
+<!--                    </div>-->
+                </div>
+
+            </div>
+            <!-- container end -->
+        </nav>
+
+    </header>
+    <!-- Header End -->
+
+
     <!-- PAGE TITLE SMALL -->
     <div class="gla_page_title gla_image_bck gla_wht_txt" data-color="#282828">
 
@@ -79,11 +107,11 @@
                                     <div class="box">
                                         <div class="cart-total-item">
                                             <label>Email (For Payment Receipt)</label>
-                                            <div class="price" id="email" th:text="${paymentInfo.email == '' ||  paymentInfo.email == null ? 'no email entered' : paymentInfo.email}" ></div>
+                                            <div class="" id="email" th:text="${paymentInfo.email == '' ||  paymentInfo.email == null ? 'no email entered' : paymentInfo.email}" ></div>
                                         </div>
                                         <div class="cart-total-item order-total">
                                             <label>Total Amount</label>
-                                            <div class="price"> <span>&#8358;</span> <span id="amount" th:text="${paymentInfo.amount == '' ||  paymentInfo.amount == null ? '0' : paymentInfo.amount}"></span> </div>
+                                            <div class=""> <span>&#8358;</span> <span id="amount" th:text="${paymentInfo.amount == '' ||  paymentInfo.amount == null ? '0' : paymentInfo.amount}"></span> </div>
                                         </div>
                                     </div>
                                 </div>
