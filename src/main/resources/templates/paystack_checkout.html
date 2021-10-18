@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>AEUnion - Paystack</title>
+
+
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
+
+    <!-- Library CSS -->
+    <link rel="stylesheet" th:href="@{/css/glanz_library.css}">
+
+    <!-- Icons CSS -->
+    <link rel="stylesheet" th:href="@{/fonts/themify-icons.css}">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" th:href="@{/css/glanz_style.css}">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,600,700%7COpen+Sans:300,400,700%7CPlayfair+Display:400,400i,700,700i"
+          rel="stylesheet">
+
+    <!-- Other Fonts -->
+    <link rel="stylesheet" th:href="@{/fonts/marsha/stylesheet.css}">
+
+
+</head>
+<body class="gla_middle_titles">
+
+
+<!-- Page -->
+<div class="gla_page" id="gla_page">
+
+
+    <!-- To Top -->
+    <a class="gla_top ti ti-angle-up gla_go" href="#gla_page"></a>
+
+
+    <!-- PAGE TITLE SMALL -->
+    <div class="gla_page_title gla_image_bck gla_wht_txt" data-color="#282828">
+
+
+        <div class="container text-left">
+            <div class="row">
+
+                <div class="col-md-8">
+                    <h1 class="gla_h1_title">Paystack Checkout</h1>
+                    <!--            <h3>Some Subtitle</h3>-->
+                </div>
+
+                <!--          <div class="col-md-4">-->
+                <!--            <div class="breadcrumbs">-->
+                <!--              <a href="">Home</a><a href="#">Registry</a><span>Paystack Checkout</span>-->
+                <!--            </div>-->
+                <!--          </div>-->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <section class="gla_content" id="gla_content">
+
+        <!-- section -->
+        <section class="gla_section">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-8 ">
+
+                        <!-- Checkout -->
+                        <div class="checkout">
+
+                            <div class="checkout-row row">
+                                <div class="cart-total col-md-12">
+                                    <h3 class="title">Payment Information</h3>
+                                    <div class="box">
+                                        <div class="cart-total-item">
+                                            <label>Email (For Payment Receipt)</label>
+                                            <div class="price" id="email" th:text="${paymentInfo.email == '' ||  paymentInfo.email == null ? 'no email entered' : paymentInfo.email}" ></div>
+                                        </div>
+                                        <div class="cart-total-item order-total">
+                                            <label>Total Amount</label>
+                                            <div class="price"> <span>&#8358;</span> <span id="amount" th:text="${paymentInfo.amount == '' ||  paymentInfo.amount == null ? '0' : paymentInfo.amount}"></span> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="button btn-checkout btn btn-default" title="Check out" type="button" onclick="prePayWithPaystack()">
+                                <em class="fa-icon"><i class="fa fa-arrow-right"></i></em>
+                                <span>Proceed to Paystack</span>
+                            </button>
+                        </div>
+                        <!-- Checkout End-->
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+            <!-- container end -->
+        </section>
+        <!-- section end -->
+
+
+    </section>
+    <!-- Content End -->
+
+
+    <!-- Footer -->
+    <section class="gla_image_bck gla_section_extra_sml gla_wht_txt" data-color="#282828">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <p>© 2021 Emeka Momodu</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer End -->
+
+</div>
+<!-- Page End -->
+
+
+<!-- JQuery -->
+<script th:src="@{/js/jquery-1.12.4.min.js}"></script>
+<!-- Library JS -->
+<script th:src="@{/js/glanz_library.js}"></script>
+
+<!-- Theme JS -->
+<script th:src="@{/js/glanz_script.js}"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script th:src="@{/paystack/js/app.js}"></script>
+
+<script th:inline="javascript">
+
+function prePayWithPaystack() {
+    var email = [[${paymentInfo.email}]];
+    var amount = [[${paymentInfo.amount}]];
+    console.log("email+++++ " + email);
+    console.log("amount+++++ " + amount);
+    payWithPaystack(email, amount);
+}
+
+
+
+</script>
+
+</body>
+</html>

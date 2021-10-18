@@ -9,7 +9,7 @@ window.onload = function() {
         ty = 0;
     var curItem = "";
     var item_list = document.querySelectorAll(".add-item");
-    $delivery = $("input[name=delivery]:checked").val();
+    $delivery = $("#radio1[name=delivery]:checked").val();
     var delivery = Number($delivery);
     document.getElementById("cost_delivery").innerHTML = delivery.toFixed(2);
     for (var i = 0; i < item_list.length; i++) {
@@ -57,7 +57,7 @@ window.onload = function() {
     }
 
     function addCost(amount) {
-        $delivery = $("input[name=delivery]:checked").val();
+        $delivery = $("#radio1[name=delivery]:checked").val();
         var delivery = Number($delivery);
         var oldcost = document.getElementById("cost_value").innerHTML;
         oldcost = parseFloat(oldcost);
@@ -75,7 +75,7 @@ window.onload = function() {
     function removeItem() {}
 
     function removeCost(amount) {
-        $delivery = $("input[name=delivery]:checked").val();
+        $delivery = $("#radio1[name=delivery]:checked").val();
         var delivery = Number($delivery);
         var oldcost = document.getElementById("cost_value").innerHTML;
         oldcost = parseFloat(oldcost);
@@ -147,7 +147,7 @@ window.onload = function() {
             document.getElementById("items-counter").style.display = "none";
         }
     }
-    $('input').change(function() {
+    $('#radio1').change(function() {
         $delivery = $(this).val();
         $total = document.getElementById("cost_value").innerHTML;
         var total = Number($total);
