@@ -1,552 +1,431 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	
-	<title>AEUnion - registry</title>
-	<meta content="" name="description">
-	<meta content="width=device-width, initial-scale=1" name="viewport">
-	<meta content="width=device-width" name="viewport">
-	<meta content="IE=edge" http-equiv="X-UA-Compatible">
-<!--	<link href="img/favicon.png" rel="icon" type="image/png">-->
-	<!-- Favicon -->
-	<link rel="icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <title>AEUnion - registry</title>
+    <meta content="" name="description">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="width=device-width" name="viewport">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <!--	<link href="img/favicon.png" rel="icon" type="image/png">-->
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
 
-	<link th:href="@{/registry/css/bootstrap-light.css}" rel="stylesheet">
-	<link id="pagestyle" th:href="@{/registry/css/theme-light.css}" rel="stylesheet">
-	<link th:href="@{/registry/css/font-awesome.min.css}" rel="stylesheet">
-	<link th:href="@{/registry/style.css}" rel="stylesheet">
-	<link th:href="@{/registry/css/responsive.css}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/registry/css/bootstrap-light.css}">
+    <link id="pagestyle" rel="stylesheet" th:href="@{/registry/css/theme-light.css}">
+    <link rel="stylesheet" th:href="@{/registry/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/registry/style.css}">
+    <link rel="stylesheet" th:href="@{/registry/css/responsive.css}">
 </head>
 
-<body data-offset="50" data-spy="scroll" data-target=".navbar" class="dark-theme">
-	<!-- PRELOADER -->
-	<div class="page-loader">
-		<div class="loader">Loading...</div>
-	</div>
-	<!-- /PRELOADER -->
-	<!-- header -->
-	<nav class="navbar navbar-fixed-top shadow" id="js-nav">
-		<div class="container">
-			<div class="navbar-header">
-				<button class="navbar-toggle" data-target="#myNavbar" data-toggle="collapse" type="button">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				
-				<a class="navbar-brand" href="#"> <img  th:src="@{/img/AE-test-3.png}" alt="AEUnion" /> </a>
-			</div>
-			<div class="collapse navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav">
-					<li><a th:href="@{/}">Home</a></li>
-					<li><a th:href="@{/registry}">Registry</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<!--/ End header -->
-	
-	<!-- cart section -->
-	<span id="items-counter" class="h3 cart-items-counter" style="display: none">0</span>
-	<div class="cart-widget-container">
-		<div class="cart-widget text-center">
-			<a class="close" id="cart-widget-close">
-				<span class="ti-close"></span>
-			</a>
-			<h1>AEUnion</h1>
-			<h3 class="section-heading">Your cart</h3>
-			<div id="cart-empty" class="cart-empty"><h4>is empty <span class="ti-face-sad icon"></span> </h4></div>
-			<!-- container for js inject cart items content -->
-			<div class="items-container" id="items"></div>
-			<!-- container for js inject cart items content -->
+<body class="dark-theme" data-offset="50" data-spy="scroll" data-target=".navbar">
+<!-- PRELOADER -->
+<div class="page-loader">
+    <div class="loader">Loading...</div>
+</div>
+<!-- /PRELOADER -->
+<!-- header -->
+<nav class="navbar navbar-fixed-top shadow" id="js-nav">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-target="#myNavbar" data-toggle="collapse" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
-			<form action="#" th:action="@{/paystack}" method="post" class="cart-form" id="cart-form" th:object="${paymentInfo}" target="_blank" rel="noopener noreferrer">
-
-			<div class="cart-delivery" id="cart-delivery">
-				<h4 class="section-heading"></h4>
-				<div class="input-group">
-					<label for="email">Email*</label>
-					<input class="form-control" type="email" placeholder="Please Enter Email" id="email" name="email" th:field="*{email}" >
-				</div>
-				<div class="custom-radio">
-					<input id="radio1" name="delivery" value="0.00" checked type="radio" hidden>
-<!--					<label for="radio1" hidden >delivery (N0)</label>-->
-				</div>
-
-<!--				<div class="custom-radio">-->
-<!--					<input id="radio2" type="radio" name="delivery" value="15.00">-->
-<!--					<label for="radio2">express domestic delivery ($15) </label>-->
-<!--				</div>-->
-
-<!--				<div class="custom-radio">-->
-<!--					<input id="radio3" type="radio" name="delivery" value="20.00">-->
-<!--					<label for="radio3">worldwide delivery ($20)</label>-->
-<!--				</div>-->
-			</div>
-			<div class="cart-summary" id="cart-summary">
-				<h4 class="section-heading">summary</h4>
-				<div class="cart-summary-row" id="cart-total">Total Gifts <span class="cart-value">N<span id="cost_value">0.00</span></span></div>
-				<div class="cart-summary-row">Shipping <span class="cart-value">N<span id="cost_delivery"></span></span></div>
-				<div class="cart-summary-row cart-summary-row-total">Total <span class="cart-value">N<span id="total-total"></span></span></div>
-				<h4 class="section-heading">Thank You <span class="ti-face-smile icon"></span></h4>
-			</div>
-
-<!--			<button type="button" name="button" class="btn btn-default btn-lg" onclick="payWithPaystack()">-->
-<!--				paystack checkout <span class="ti-arrow-right"></span>-->
-<!--			</button>-->
-
-
-				<!-- Identify your business so that you can collect the payments. -->
-				<input type="hidden" name="business" value="yourpaypal@email.com">
-				<!-- Specify a Buy Now button. -->
-				<input type="hidden" name="cmd" value="_xclick">
-				<!-- Specify details about the item that buyers will purchase. -->
-				<input type="hidden" name="item_name" value="Bestshop shop - checkout">
-				<input type="hidden" name="amount" id="amount" value="" th:field="*{amount}">
-				<input type="hidden" name="currency_code" value="USD">
-				<!-- Display the payment button. -->
-				<button type="submit" name="submit" class="btn btn-default btn-lg">
-					paystack checkout <span class="ti-arrow-right"></span>
-				</button>
-			</form>
-		</div>
-		<div class="cart-widget-close-overlay"></div>
-	</div>
-	<!--/ cart section end -->
-
-	
-	<!-- products area -->	
-	<section class="section-min section product" id="products">
-		<div class="container overflow-hidden">
-			<div class="row">
-				<div class="new-products-area">			
-					<div class="col-md-12">
-						<h3 class="section-heading">Registry Items</h3>
-					</div>
-					<div class="col-md-12">
-						<div class="product-list-slider">
-							<ul class="swiper-wrapper product-list product-list-vertical">
-								<li class="swiper-slide text-center"> 
-									<span class="product-list-left pull-left">
-<!--										<span class="sale-p">sale</span>-->
-										<a href="#" data-target="#product-01" data-toggle="modal"><img alt="product image" class="product-list-primary-img" th:src="@{/registry/img/p1.jpg}">
-										<img alt="product image" class="product-list-secondary-img" th:src="@{/registry/img/p2.jpg}">
-										</a>
-									</span> 
-
-									<a href="#" data-target="#product-01" data-toggle="modal">
-										<span class="product-list-right pull-left">
-											<span class="product-list-name h4 black-color">women white backless mini</span>
-											<span class="product-list-price">$400.00</span>
-											<span class="product-list-price sell-p"><del>$580.00</del></span>
-										</span>
-									</a> 
-
-									<button class="btn btn-default add-item" type="button" data-image="registry/img/p1.jpg" data-name="women white backless mini" data-cost="400.00" data-id="1" >
-										add to cart
-									</button> 		
-								</li>
-								
-								<li class="swiper-slide text-center"> 
-									<span class="product-list-left pull-left">
-										<a href="#" data-target="#product-01" data-toggle="modal"><img alt="product image" class="product-list-primary-img" th:src="@{/registry/img/p3.jpg}">
-										<img alt="product image" class="product-list-secondary-img" th:src="@{/registry/img/p4.jpg}">
-										</a>
-									</span> 
-
-									<a href="#" data-target="#product-01" data-toggle="modal">
-										<span class="product-list-right pull-left">
-											<span class="product-list-name h4 black-color">women totes lady handbag</span>
-											<span class="product-list-price">$300.00</span>
-										</span>
-									</a>
-
-									<button class="btn btn-default add-item" type="button" data-image="registry/img/p3.jpg" data-name=" women totes lady handbag" data-cost="300.00" data-id="2" >
-										add to cart
-									</button> 	
-								</li>
-
-								<li class="swiper-slide text-center"> 
-									<span class="product-list-left pull-left">
-<!--										<span class="sale-p new-p">new</span>-->
-										<a href="#" data-target="#product-01" data-toggle="modal"><img alt="product image" class="product-list-primary-img" th:src="@{/registry/img/p5.jpg}">
-										<img alt="product image" class="product-list-secondary-img" th:src="@{/registry/img/p6.jpg}">
-										</a>
-									</span> 
-
-									<a href="#" data-target="#product-01" data-toggle="modal">
-										<span class="product-list-right pull-left">
-											<span class="product-list-name h4 black-color">Sexy Women Floral Embroidery</span>
-											<span class="product-list-price">$600.00</span>
-										</span>
-									</a> 
-
-									<button class="btn btn-default add-item" type="button" data-image="registry/img/p5.jpg" data-name="Sexy Women Floral Embroidery" data-cost="600.00" data-id="3" >
-										add to cart
-									</button> 		
-								</li>
-								
-								<li class="swiper-slide  text-center" > 
-									<span class="product-list-left pull-left">
-										<a href="#" data-target="#product-01" data-toggle="modal"><img alt="product image" class="product-list-primary-img" th:src="@{/registry/img/p7.jpg}">
-										<img alt="product image" class="product-list-secondary-img" th:src="@{/registry/img/p8.jpg}">
-										</a>
-									</span> 
-
-									<a href="#" data-target="#product-01" data-toggle="modal">
-										<span class="product-list-right pull-left">
-											<span class="product-list-name h4 black-color">Elegant Formal Party Dress</span>
-											<span class="product-list-price">$500.00</span>
-										</span>
-									</a>
-
-									<button class="btn btn-default add-item" type="button" data-image="registry/img/p7.jpg" data-name="Elegant Formal Party Dress" data-cost="500.00" data-id="4" >
-										add to cart
-									</button> 	
-								</li>
-
-								<li class="swiper-slide text-center"> 
-									<span class="product-list-left pull-left">
-<!--										<span class="sale-p">sale</span>-->
-										<a href="#" data-target="#product-01" data-toggle="modal"><img alt="product image" class="product-list-primary-img" th:src="@{/registry/img/p9.jpg}">
-										<img alt="product image" class="product-list-secondary-img" th:src="@{/registry/img/p10.jpg}">
-										</a>
-									</span> 
-
-									<a href="#" data-target="#product-01" data-toggle="modal">
-										<span class="product-list-right pull-left">
-											<span class="product-list-name h4 black-color">Mini Dress Ladies Sleeve</span>
-											<span class="product-list-price">$600.00</span>
-											<span class="product-list-price sell-p"><del>$700.00</del></span>
-										</span>
-									</a> 
-
-									<button class="btn btn-default add-item" type="button" data-image="registry/img/p9.jpg" data-name="Mini Dress Ladies Sleeve" data-cost="600.00" data-id="5" >
-										add to cart
-									</button> 		
-								</li>
-								
-								<li class="swiper-slide text-center"> 
-									<span class="product-list-left pull-left">
-										<a href="#" data-target="#product-01" data-toggle="modal"><img alt="product image" class="product-list-primary-img" th:src="@{/registry/img/p1.jpg}">
-										<img alt="product image" class="product-list-secondary-img" th:src="@{/registry/img/p2.jpg}">
-										</a>
-									</span> 
-
-									<a href="#" data-target="#product-01" data-toggle="modal">
-										<span class="product-list-right pull-left">
-											<span class="product-list-name h4 black-color">Winter Long Sleeve Black White </span>
-											<span class="product-list-price">$500.00</span>
-										</span>
-									</a>
-
-									<button class="btn btn-default add-item" type="button" data-image="registry/img/p1.jpg" data-name="Winter Long Sleeve Black White" data-cost="500.00" data-id="6" >
-										add to cart
-									</button> 	
-								</li>
-							</ul>
-							<!-- Add Pagination -->
-							<div class="product-list-pagination text-center"> </div>
-							<div class="product-list-slider-next right-arrow-negative"> <span class="ti-arrow-right"></span> </div>
-							<div class="product-list-slider-prev left-arrow-negative"> <span class="ti-arrow-left"></span> </div>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="product-list-slider">
-							<ul class="swiper-wrapper product-list product-list-vertical">
-								<li class="swiper-slide text-center">
-									<span class="product-list-left pull-left">
-<!--										<span class="sale-p">sale</span>-->
-										<a href="#" data-target="#product-01" data-toggle="modal"><img alt="product image" class="product-list-primary-img" th:src="@{/registry/img/p1.jpg}">
-										<img alt="product image" class="product-list-secondary-img" th:src="@{/registry/img/p2.jpg}">
-										</a>
-									</span>
-
-									<a href="#" data-target="#product-01" data-toggle="modal">
-										<span class="product-list-right pull-left">
-											<span class="product-list-name h4 black-color">women white backless mini</span>
-											<span class="product-list-price">$400.00</span>
-											<span class="product-list-price sell-p"><del>$580.00</del></span>
-										</span>
-									</a>
-
-									<button class="btn btn-default add-item" type="button" data-image="registry/img/p1.jpg" data-name="women white backless mini" data-cost="400.00" data-id="1" >
-										add to cart
-									</button>
-								</li>
-
-								<li class="swiper-slide text-center">
-									<span class="product-list-left pull-left">
-										<a href="#" data-target="#product-01" data-toggle="modal"><img alt="product image" class="product-list-primary-img" th:src="@{/registry/img/p3.jpg}">
-										<img alt="product image" class="product-list-secondary-img" th:src="@{/registry/img/p4.jpg}">
-										</a>
-									</span>
-
-									<a href="#" data-target="#product-01" data-toggle="modal">
-										<span class="product-list-right pull-left">
-											<span class="product-list-name h4 black-color">women totes lady handbag</span>
-											<span class="product-list-price">$300.00</span>
-										</span>
-									</a>
-
-									<button class="btn btn-default add-item" type="button" data-image="registry/img/p3.jpg" data-name=" women totes lady handbag" data-cost="300.00" data-id="2" >
-										add to cart
-									</button>
-								</li>
-
-								<li class="swiper-slide text-center">
-									<span class="product-list-left pull-left">
-<!--										<span class="sale-p new-p">new</span>-->
-										<a href="#" data-target="#product-01" data-toggle="modal"><img alt="product image" class="product-list-primary-img" th:src="@{/registry/img/p5.jpg}">
-										<img alt="product image" class="product-list-secondary-img" th:src="@{/registry/img/p6.jpg}">
-										</a>
-									</span>
-
-									<a href="#" data-target="#product-01" data-toggle="modal">
-										<span class="product-list-right pull-left">
-											<span class="product-list-name h4 black-color">Sexy Women Floral Embroidery</span>
-											<span class="product-list-price">$600.00</span>
-										</span>
-									</a>
-
-									<button class="btn btn-default add-item" type="button" data-image="registry/img/p5.jpg" data-name="Sexy Women Floral Embroidery" data-cost="600.00" data-id="3" >
-										add to cart
-									</button>
-								</li>
-
-								<li class="swiper-slide  text-center" >
-									<span class="product-list-left pull-left">
-										<a href="#" data-target="#product-01" data-toggle="modal"><img alt="product image" class="product-list-primary-img" th:src="@{/registry/img/p7.jpg}">
-										<img alt="product image" class="product-list-secondary-img" th:src="@{/registry/img/p8.jpg}">
-										</a>
-									</span>
-
-									<a href="#" data-target="#product-01" data-toggle="modal">
-										<span class="product-list-right pull-left">
-											<span class="product-list-name h4 black-color">Elegant Formal Party Dress</span>
-											<span class="product-list-price">$500.00</span>
-										</span>
-									</a>
-
-									<button class="btn btn-default add-item" type="button" data-image="registry/img/p7.jpg" data-name="Elegant Formal Party Dress" data-cost="500.00" data-id="4" >
-										add to cart
-									</button>
-								</li>
-
-								<li class="swiper-slide text-center">
-									<span class="product-list-left pull-left">
-<!--										<span class="sale-p">sale</span>-->
-										<a href="#" data-target="#product-01" data-toggle="modal"><img alt="product image" class="product-list-primary-img" th:src="@{/registry/img/p9.jpg}">
-										<img alt="product image" class="product-list-secondary-img" th:src="@{/registry/img/p10.jpg}">
-										</a>
-									</span>
-
-									<a href="#" data-target="#product-01" data-toggle="modal">
-										<span class="product-list-right pull-left">
-											<span class="product-list-name h4 black-color">Mini Dress Ladies Sleeve</span>
-											<span class="product-list-price">$600.00</span>
-											<span class="product-list-price sell-p"><del>$700.00</del></span>
-										</span>
-									</a>
-
-									<button class="btn btn-default add-item" type="button" data-image="registry/img/p9.jpg" data-name="Mini Dress Ladies Sleeve" data-cost="600.00" data-id="5" >
-										add to cart
-									</button>
-								</li>
-
-								<li class="swiper-slide text-center">
-									<span class="product-list-left pull-left">
-										<a href="#" data-target="#product-01" data-toggle="modal"><img alt="product image" class="product-list-primary-img" th:src="@{/registry/img/p1.jpg}">
-										<img alt="product image" class="product-list-secondary-img" th:src="@{/registry/img/p2.jpg}">
-										</a>
-									</span>
-
-									<a href="#" data-target="#product-01" data-toggle="modal">
-										<span class="product-list-right pull-left">
-											<span class="product-list-name h4 black-color">Winter Long Sleeve Black White </span>
-											<span class="product-list-price">$500.00</span>
-										</span>
-									</a>
-
-									<button class="btn btn-default add-item" type="button" data-image="registry/img/p1.jpg" data-name="Winter Long Sleeve Black White" data-cost="500.00" data-id="6" >
-										add to cart
-									</button>
-								</li>
-							</ul>
-							<!-- Add Pagination -->
-							<div class="product-list-pagination text-center"> </div>
-							<div class="product-list-slider-next right-arrow-negative"> <span class="ti-arrow-right"></span> </div>
-							<div class="product-list-slider-prev left-arrow-negative"> <span class="ti-arrow-left"></span> </div>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="product-list-slider">
-							<ul class="swiper-wrapper product-list product-list-vertical">
-								<li class="swiper-slide text-center">
-									<span class="product-list-left pull-left">
-<!--										<span class="sale-p">sale</span>-->
-										<a href="#" data-target="#product-01" data-toggle="modal"><img alt="product image" class="product-list-primary-img" th:src="@{/registry/img/p1.jpg}">
-										<img alt="product image" class="product-list-secondary-img" th:src="@{/registry/img/p2.jpg}">
-										</a>
-									</span>
-
-									<a href="#" data-target="#product-01" data-toggle="modal">
-										<span class="product-list-right pull-left">
-											<span class="product-list-name h4 black-color">women white backless mini</span>
-											<span class="product-list-price">$400.00</span>
-											<span class="product-list-price sell-p"><del>$580.00</del></span>
-										</span>
-									</a>
-
-									<button class="btn btn-default add-item" type="button" data-image="registry/img/p1.jpg" data-name="women white backless mini" data-cost="400.00" data-id="1" >
-										add to cart
-									</button>
-								</li>
-
-								<li class="swiper-slide text-center">
-									<span class="product-list-left pull-left">
-										<a href="#" data-target="#product-01" data-toggle="modal"><img alt="product image" class="product-list-primary-img" th:src="@{/registry/img/p3.jpg}">
-										<img alt="product image" class="product-list-secondary-img" th:src="@{/registry/img/p4.jpg}">
-										</a>
-									</span>
-
-									<a href="#" data-target="#product-01" data-toggle="modal">
-										<span class="product-list-right pull-left">
-											<span class="product-list-name h4 black-color">women totes lady handbag</span>
-											<span class="product-list-price">$300.00</span>
-										</span>
-									</a>
-
-									<button class="btn btn-default add-item" type="button" data-image="registry/img/p3.jpg" data-name=" women totes lady handbag" data-cost="300.00" data-id="2" >
-										add to cart
-									</button>
-								</li>
-
-								<li class="swiper-slide text-center">
-									<span class="product-list-left pull-left">
-<!--										<span class="sale-p new-p">new</span>-->
-										<a href="#" data-target="#product-01" data-toggle="modal"><img alt="product image" class="product-list-primary-img" th:src="@{/registry/img/p5.jpg}">
-										<img alt="product image" class="product-list-secondary-img" th:src="@{/registry/img/p6.jpg}">
-										</a>
-									</span>
-
-									<a href="#" data-target="#product-01" data-toggle="modal">
-										<span class="product-list-right pull-left">
-											<span class="product-list-name h4 black-color">Sexy Women Floral Embroidery</span>
-											<span class="product-list-price">$600.00</span>
-										</span>
-									</a>
-
-									<button class="btn btn-default add-item" type="button" data-image="registry/img/p5.jpg" data-name="Sexy Women Floral Embroidery" data-cost="600.00" data-id="3" >
-										add to cart
-									</button>
-								</li>
-
-								<li class="swiper-slide  text-center" >
-									<span class="product-list-left pull-left">
-										<a href="#" data-target="#product-01" data-toggle="modal"><img alt="product image" class="product-list-primary-img" th:src="@{/registry/img/p7.jpg}">
-										<img alt="product image" class="product-list-secondary-img" th:src="@{/registry/img/p8.jpg}">
-										</a>
-									</span>
-
-									<a href="#" data-target="#product-01" data-toggle="modal">
-										<span class="product-list-right pull-left">
-											<span class="product-list-name h4 black-color">Elegant Formal Party Dress</span>
-											<span class="product-list-price">$500.00</span>
-										</span>
-									</a>
-
-									<button class="btn btn-default add-item" type="button" data-image="registry/img/p7.jpg" data-name="Elegant Formal Party Dress" data-cost="500.00" data-id="4" >
-										add to cart
-									</button>
-								</li>
-
-								<li class="swiper-slide text-center">
-									<span class="product-list-left pull-left">
-<!--										<span class="sale-p">sale</span>-->
-										<a href="#" data-target="#product-01" data-toggle="modal"><img alt="product image" class="product-list-primary-img" th:src="@{/registry/img/p9.jpg}">
-										<img alt="product image" class="product-list-secondary-img" th:src="@{/registry/img/p10.jpg}">
-										</a>
-									</span>
-
-									<a href="#" data-target="#product-01" data-toggle="modal">
-										<span class="product-list-right pull-left">
-											<span class="product-list-name h4 black-color">Mini Dress Ladies Sleeve</span>
-											<span class="product-list-price">$600.00</span>
-											<span class="product-list-price sell-p"><del>$700.00</del></span>
-										</span>
-									</a>
-
-									<button class="btn btn-default add-item" type="button" data-image="registry/img/p9.jpg" data-name="Mini Dress Ladies Sleeve" data-cost="600.00" data-id="5" >
-										add to cart
-									</button>
-								</li>
-
-								<li class="swiper-slide text-center">
-									<span class="product-list-left pull-left">
-										<a href="#" data-target="#product-01" data-toggle="modal"><img alt="product image" class="product-list-primary-img" th:src="@{/registry/img/p1.jpg}">
-										<img alt="product image" class="product-list-secondary-img" th:src="@{/registry/img/p2.jpg}">
-										</a>
-									</span>
-
-									<a href="#" data-target="#product-01" data-toggle="modal">
-										<span class="product-list-right pull-left">
-											<span class="product-list-name h4 black-color">Winter Long Sleeve Black White </span>
-											<span class="product-list-price">$500.00</span>
-										</span>
-									</a>
-
-									<button class="btn btn-default add-item" type="button" data-image="registry/img/p1.jpg" data-name="Winter Long Sleeve Black White" data-cost="500.00" data-id="6" >
-										add to cart
-									</button>
-								</li>
-							</ul>
-							<!-- Add Pagination -->
-							<div class="product-list-pagination text-center"> </div>
-							<div class="product-list-slider-next right-arrow-negative"> <span class="ti-arrow-right"></span> </div>
-							<div class="product-list-slider-prev left-arrow-negative"> <span class="ti-arrow-left"></span> </div>
-						</div>
-					</div>
-				</div>	
-			</div>
-		</div>
-		
-
-	</section>
-	<!--/ products area end -->
-
-	<!-- Footer Section -->
-	<div class="section section-min">
-		<footer class="footer">
-		 <div class="container">
-			  <div class="row">
-
-				   <div class="col-md-12 col-sm-12">
-						<div class="footer-copyright">
-							 <p>© 2021 Emeka Momodu</p>
-						</div>
-				   </div>
-				   
-		 	   </div>
-		    </div>
-	    </footer>
-
+            <a class="navbar-brand" href="#"> <img alt="AEUnion" th:src="@{/img/AE-test-3.png}"/> </a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/registry}">Registry</a></li>
+            </ul>
+        </div>
     </div>
-	
-	<script th:src="@{/registry/js/vendor/jquery-2.2.4.min.js}"></script>
-	<script th:src="@{/registry/js/vendor/swiper.min.js}"></script>
-	<script th:src="@{/registry/js/vendor/bootstrap.min.js}"></script>
-	<script th:src="@{/registry/js/vendor/jquery.inview.js}"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYNfZ-tL7Q_kGLMO4Y5xz4lCl70V74AF4"></script>
-	<script th:src="@{/registry/js/vendor/jquery.countdown.js}"></script>
-	<script th:src="@{/registry/js/tt-cart.js}"></script>
-	<script th:src="@{/registry/js/ajax-mail.js}"></script>
-	<script th:src="@{/registry/js/contact.js}"></script>
-	<script th:src="@{/registry/js/plugins.js}"></script>
-	<script th:src="@{/registry/js/main.js}"></script>
+</nav>
+<!--/ End header -->
+
+<!-- cart section -->
+<span class="h3 cart-items-counter" id="items-counter" style="display: none">0</span>
+<div class="cart-widget-container">
+    <div class="cart-widget text-center">
+        <a class="close" id="cart-widget-close">
+            <span class="ti-close"></span>
+        </a>
+        <h1>AEUnion</h1>
+        <h3 class="section-heading">Your cart</h3>
+        <div class="cart-empty" id="cart-empty"><h4>is empty <span class="ti-face-sad icon"></span></h4></div>
+        <!-- container for js inject cart items content -->
+        <div class="items-container" id="items"></div>
+        <!-- container for js inject cart items content -->
+
+        <form action="#" class="cart-form" id="cart-form" method="post" rel="noopener noreferrer"
+              target="_blank" th:action="@{/paystack}" th:object="${paymentInfo}">
+
+            <div class="cart-delivery" id="cart-delivery">
+                <h4 class="section-heading"></h4>
+                <div class="input-group">
+                    <label for="email">Email*</label>
+                    <input class="form-control" id="email" name="email" placeholder="Please Enter Email"
+                           th:field="*{email}"
+                           type="email">
+                </div>
+                <div class="custom-radio">
+                    <input checked hidden id="radio1" name="delivery" type="radio" value="0.00">
+                    <!--					<label for="radio1" hidden >delivery (N0)</label>-->
+                </div>
+
+                <!--				<div class="custom-radio">-->
+                <!--					<input id="radio2" type="radio" name="delivery" value="15.00">-->
+                <!--					<label for="radio2">express domestic delivery ($15) </label>-->
+                <!--				</div>-->
+
+                <!--				<div class="custom-radio">-->
+                <!--					<input id="radio3" type="radio" name="delivery" value="20.00">-->
+                <!--					<label for="radio3">worldwide delivery ($20)</label>-->
+                <!--				</div>-->
+            </div>
+            <div class="cart-summary" id="cart-summary">
+                <h4 class="section-heading">summary</h4>
+                <div class="cart-summary-row" id="cart-total">Total Gifts <span class="cart-value">&#8358;<span
+                        id="cost_value">0.00</span></span></div>
+                <div class="cart-summary-row">Shipping <span class="cart-value">&#8358;<span id="cost_delivery"></span></span>
+                </div>
+                <div class="cart-summary-row cart-summary-row-total">Total <span class="cart-value">&#8358;<span
+                        id="total-total"></span></span></div>
+                <h4 class="section-heading">Thank You <span class="ti-face-smile icon"></span></h4>
+            </div>
+
+            <!--			<button type="button" name="button" class="btn btn-default btn-lg" onclick="payWithPaystack()">-->
+            <!--				paystack checkout <span class="ti-arrow-right"></span>-->
+            <!--			</button>-->
+
+
+            <!-- Identify your business so that you can collect the payments. -->
+            <input name="business" type="hidden" value="yourpaypal@email.com">
+            <!-- Specify a Buy Now button. -->
+            <input name="cmd" type="hidden" value="_xclick">
+            <!-- Specify details about the item that buyers will purchase. -->
+            <input name="item_name" type="hidden" value="Bestshop shop - checkout">
+            <input id="amount" name="amount" th:field="*{amount}" type="hidden" value="">
+            <input name="currency_code" type="hidden" value="USD">
+            <!-- Display the payment button. -->
+            <button class="btn btn-default btn-lg" name="submit" type="submit">
+                paystack checkout <span class="ti-arrow-right"></span>
+            </button>
+        </form>
+    </div>
+    <div class="cart-widget-close-overlay"></div>
+</div>
+<!--/ cart section end -->
+
+
+<!-- products area -->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<section class="section-min section product" id="products">
+    <div class="container overflow-hidden">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="section-heading">Registry Items</h3>
+            </div>
+            <div class="col-md-12">
+                <div class="product-list-sliderd">
+                    <ul class="swiper-wrappers product-list product-list-vertical">
+
+                        <!--1-->
+                        <li class="swiper-slidess text-center">
+									<span class="product-list-left pull-left">
+										<a data-target="#product-01" data-toggle="modal" href="#">
+											<img alt="product image" class="product-list-primary-img"
+                                                 style="float: left; width:  300px; height: 250px; object-fit: cover;"
+                                                 th:src="@{/rsz_1picture1.jpeg}">
+											<img alt="product image" class="product-list-secondary-img"
+                                                 style="float: left; width:  300px; height: 250px; object-fit: cover;"
+                                                 th:src="@{/rsz_1picture1.jpeg}">
+										</a>
+									</span>
+
+                            <a data-target="#product-01" data-toggle="modal" href="#">
+										<span class="product-list-right pull-left">
+											<span class="product-list-name h4 black-color">Electric Kettle (Two In One)</span>
+											<span class="product-list-price">&#8358;16000.00</span>
+										</span>
+                            </a>
+
+                            <button class="btn btn-default add-item" data-cost="16000.00" data-id="1"
+                                    data-image="/rsz_1picture1.jpeg" data-name="Electric Kettle (Two In One)"
+                                    type="button">
+                                add to cart
+                            </button>
+                        </li>
+
+                        <!--2-->
+                        <li class="swiper-slidess text-center">
+									<span class="product-list-left pull-left">
+										<a data-target="#product-02" data-toggle="modal" href="#"><img
+                                                alt="product image" class="product-list-primary-img"
+                                                style="float: left; width:  300px; height: 250px; object-fit: cover;"
+                                                th:src="@{/Picture2.jpg}">
+										<img alt="product image" class="product-list-secondary-img"
+                                             style="float: left; width:  300px; height: 250px; object-fit: cover;"
+                                             th:src="@{/Picture2.jpg}">
+										</a>
+									</span>
+
+                            <a data-target="#product-02" data-toggle="modal" href="#">
+										<span class="product-list-right pull-left">
+											<span class="product-list-name h4 black-color">Stainless Steel Cutlery Set (24 pcs)</span>
+											<span class="product-list-price">&#8358;20000.00</span>
+										</span>
+                            </a>
+
+                            <button class="btn btn-default add-item" data-cost="20000.00" data-id="2"
+                                    data-image="/Picture2.jpg" data-name="Stainless Steel Cutlery Set (24 pcs)"
+                                    type="button">
+                                add to cart
+                            </button>
+                        </li>
+
+                        <!--3-->
+                        <li class="swiper-slidess text-center">
+									<span class="product-list-left pull-left">
+										<a data-target="#product-03" data-toggle="modal" href="#"><img
+                                                alt="product image" class="product-list-primary-img"
+                                                style="float: left; width:  300px; height: 250px; object-fit: cover;"
+                                                th:src="@{/Picture3.jpg}">
+										<img alt="product image" class="product-list-secondary-img"
+                                             style="float: left; width:  300px; height: 250px; object-fit: cover;"
+                                             th:src="@{/Picture3.jpg}">
+										</a>
+									</span>
+
+                            <a data-target="#product-03" data-toggle="modal" href="#">
+										<span class="product-list-right pull-left">
+											<span class="product-list-name h4 black-color">Mobile Kitchen Trolley (100 x 42cm)</span>
+											<span class="product-list-price">&#8358;31000.00</span>
+										</span>
+                            </a>
+
+                            <button class="btn btn-default add-item" data-cost="31000.00" data-id="3"
+                                    data-image="/Picture3.jpg" data-name="Mobile Kitchen Trolley (100 x 42cm)"
+                                    type="button">
+                                add to cart
+                            </button>
+                        </li>
+
+                        <!--4-->
+                        <li class="swiper-slidess  text-center">
+                                <span class="product-list-left pull-left">
+                                    <a data-target="#product-04" data-toggle="modal" href="#"><img
+                                            alt="product image" class="product-list-primary-img"
+                                            style="float: left; width:  300px; height: 250px; object-fit: cover;"
+                                            th:src="@{/Picture4.jpg}">
+                                    <img alt="product image" class="product-list-secondary-img"
+                                         style="float: left; width:  300px; height: 250px; object-fit: cover;"
+                                         th:src="@{/Picture4.jpg}">
+                                    </a>
+                                </span>
+
+                            <a data-target="#product-04" data-toggle="modal" href="#">
+                                    <span class="product-list-right pull-left">
+                                        <span class="product-list-name h4 black-color">Dessini Double Grill Pan</span>
+                                        <span class="product-list-price">&#8358;19000.00</span>
+                                    </span>
+                            </a>
+
+                            <button class="btn btn-default add-item" data-cost="19000.00" data-id="4"
+                                    data-image="/Picture4.jpg" data-name="Dessini Double Grill Pan" type="button">
+                                add to cart
+                            </button>
+                        </li>
+
+                        <!--5-->
+                        <li class="swiper-slidess text-center">
+									<span class="product-list-left pull-left">
+										<a data-target="#product-05" data-toggle="modal" href="#"><img
+                                                alt="product image" class="product-list-primary-img"
+                                                style="float: left; width:  300px; height: 250px; object-fit: cover;"
+                                                th:src="@{/Picture5.jpg}">
+										<img alt="product image" class="product-list-secondary-img"
+                                             style="float: left; width:  300px; height: 250px; object-fit: cover;"
+                                             th:src="@{/Picture5.jpg}">
+										</a>
+									</span>
+
+                            <a data-target="#product-05" data-toggle="modal" href="#">
+										<span class="product-list-right pull-left">
+											<span class="product-list-name h4 black-color">Plastic Acrylic Carafes (5 pcs)</span>
+											<span class="product-list-price">&#8358;20000.00</span>
+										</span>
+                            </a>
+
+                            <button class="btn btn-default add-item" data-cost="20000.00" data-id="5"
+                                    data-image="/Picture5.jpg" data-name="Plastic Acrylic Carafes (5 pcs)"
+                                    type="button">
+                                add to cart
+                            </button>
+                        </li>
+
+                        <!--6-->
+                        <li class="swiper-slidess text-center">
+								<span class="product-list-left pull-left">
+									<a data-target="#product-06" data-toggle="modal" href="#">
+                                        <img alt="product image"
+                                           class="product-list-primary-img"
+                                             style="float: left; width:  300px; height: 250px; object-fit: cover;"
+                                           th:src="@{/Picture6.jpg}">
+									<img alt="product image" class="product-list-secondary-img"
+                                         style="float: left; width:  300px; height: 250px; object-fit: cover;"
+                                         th:src="@{/Picture6.jpg}">
+									</a>
+								</span>
+
+                            <a data-target="#product-06" data-toggle="modal" href="#">
+									<span class="product-list-right pull-left">
+										<span class="product-list-name h4 black-color">Food Warmer Bags (2 sets)</span>
+										<span class="product-list-price">&#8358;22700.00</span>
+									</span>
+                            </a>
+
+                            <button class="btn btn-default add-item" data-cost="22700.00" data-id="6"
+                                    data-image="/Picture6.jpg" data-name="Food Warmer Bags (2 sets)" type="button">
+                                add to cart
+                            </button>
+                        </li>
+
+
+                        <!--7-->
+                        <li class="swiper-slidess text-center">
+									<span class="product-list-left pull-left">
+										<a data-target="#product-07" data-toggle="modal" href="#">
+											<img alt="product image" class="product-list-primary-img"
+                                                 style="float: left; width:  300px; height: 250px; object-fit: cover;"
+                                                 th:src="@{/Picture7.jpg}">
+											<img alt="product image" class="product-list-secondary-img"
+                                                 style="float: left; width:  300px; height: 250px; object-fit: cover;"
+                                                 th:src="@{/Picture7.jpg}">
+										</a>
+									</span>
+
+                            <a data-target="#product-07" data-toggle="modal" href="#">
+										<span class="product-list-right pull-left">
+											<span class="product-list-name h4 black-color">Foot Mat (45 x 75cm - 10 sets)</span>
+											<span class="product-list-price">&#8358;25000.00</span>
+										</span>
+                            </a>
+
+                            <button class="btn btn-default add-item" data-cost="25000.00" data-id="7"
+                                    data-image="/Picture7.jpg" data-name="Foot Mat (45 x 75cm - 10 sets)"
+                                    type="button">
+                                add to cart
+                            </button>
+                        </li>
+
+                        <!--8-->
+                        <li class="swiper-slidess text-center">
+									<span class="product-list-left pull-left">
+										<a data-target="#product-08" data-toggle="modal" href="#"><img
+                                                alt="product image" class="product-list-primary-img"
+                                                style="float: left; width:  300px; height: 250px; object-fit: cover;"
+                                                th:src="@{/Picture8.jpg}">
+										<img alt="product image" class="product-list-secondary-img"
+                                             style="float: left; width:  300px; height: 250px; object-fit: cover;"
+                                             th:src="@{/Picture8.jpg}">
+										</a>
+									</span>
+
+                            <a data-target="#product-08" data-toggle="modal" href="#">
+										<span class="product-list-right pull-left">
+											<span class="product-list-name h4 black-color">Closet Underwear Organizer (2 Sets of 3 packs)</span>
+											<span class="product-list-price">&#8358;22400.00</span>
+										</span>
+                            </a>
+
+                            <button class="btn btn-default add-item" data-cost="22400.00" data-id="8"
+                                    data-image="/Picture8.jpg" data-name="Closet Underwear Organizer (2 Sets of 3 packs)"
+                                    type="button">
+                                add to cart
+                            </button>
+                        </li>
+
+                        <!--9-->
+                        <li class="swiper-slidess text-center">
+									<span class="product-list-left pull-left">
+										<a data-target="#product-09" data-toggle="modal" href="#"><img
+                                                alt="product image" class="product-list-primary-img"
+                                                style="float: left; width:  300px; height: 250px; object-fit: cover;"
+                                                th:src="@{/Picture9.jpg}">
+										<img alt="product image" class="product-list-secondary-img"
+                                             style="float: left; width:  300px; height: 250px; object-fit: cover;"
+                                             th:src="@{/Picture9.jpg}">
+										</a>
+									</span>
+
+                            <a data-target="#product-09" data-toggle="modal" href="#">
+										<span class="product-list-right pull-left">
+											<span class="product-list-name h4 black-color">Candle holder figurine (Set of 2)</span>
+											<span class="product-list-price">&#8358;23000.00</span>
+										</span>
+                            </a>
+
+                            <button class="btn btn-default add-item" data-cost="23000.00" data-id="9"
+                                    data-image="/Picture9.jpg" data-name="Candle holder figurine (Set of 2)"
+                                    type="button">
+                                add to cart
+                            </button>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+</section>
+<!--/ products area end -->
+
+<!-- Footer Section -->
+<div class="section section-min">
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12 col-sm-12">
+                    <div class="footer-copyright">
+                        <p>© 2021 Emeka Momodu</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<script th:src="@{/registry/js/vendor/jquery-2.2.4.min.js}"></script>
+<script th:src="@{/registry/js/vendor/swiper.min.js}"></script>
+<script th:src="@{/registry/js/vendor/bootstrap.min.js}"></script>
+<script th:src="@{/registry/js/vendor/jquery.inview.js}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYNfZ-tL7Q_kGLMO4Y5xz4lCl70V74AF4"></script>
+<script th:src="@{/registry/js/vendor/jquery.countdown.js}"></script>
+<script th:src="@{/registry/js/tt-cart.js}"></script>
+<script th:src="@{/registry/js/ajax-mail.js}"></script>
+<script th:src="@{/registry/js/contact.js}"></script>
+<script th:src="@{/registry/js/plugins.js}"></script>
+<script th:src="@{/registry/js/main.js}"></script>
 </body>
 
 </html>

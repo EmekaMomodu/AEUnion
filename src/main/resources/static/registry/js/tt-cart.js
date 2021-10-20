@@ -48,7 +48,7 @@ window.onload = function() {
         document.getElementById("items").innerHTML += "<div class='cart-item hidden' id='item" + cindex +
             "' data-id='" + id + "'><span class='cart-item-image'><img alt='" + curName + "' src='" + curImage +
             "'/></span><span class='cart-item-name h4'>" + curName +
-            "</span><span class='cart-item-price'>$<span class='cvalue'>" + cost +
+            "</span><span class='cart-item-price'>&#8358;<span class='cvalue'>" + cost +
             "</span></span> <span class='cart-item-remove'><span class='ti-close'></span><span></div>";
         document.getElementById("items-counter").innerHTML += "<span class='animate'>" + curCounter +
             "<span class='circle'></span></span>";
